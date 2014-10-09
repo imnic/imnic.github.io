@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://imnic.github.io/atom.xml" rel="self"/>
   <link href="http://imnic.github.io/"/>
-  <updated>2014-10-09T15:43:13+08:00</updated>
+  <updated>2014-10-09T15:45:02+08:00</updated>
   <id>http://imnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,7 +18,7 @@
     <link href="http://imnic.github.io/blog/2014/10/09/ios-develop-1/"/>
     <updated>2014-10-09T15:34:31+08:00</updated>
     <id>http://imnic.github.io/blog/2014/10/09/ios-develop-1</id>
-    <content type="html"><![CDATA[<p>这是我的第一篇blog。</p>
+    <content type="html"><![CDATA[<p>这是我的第一篇blog,欢迎大家来访～</p>
 ]]></content>
   </entry>
   
