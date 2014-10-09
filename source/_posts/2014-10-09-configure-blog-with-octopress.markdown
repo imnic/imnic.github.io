@@ -14,13 +14,13 @@ categories: 工具
 
 2. **安装 Ruby：**可以使用[Rbenv](http://octopress.org/docs/setup/rbenv)或者[RVM](http://octopress.org/docs/setup/rvm)两种方式安装，注意，我们要保证ruby的版本不能地狱1.9.3，具体的查看方式为：在Terminal中输入 ruby --version 命令查。   
 3. **设置 Octopess：** 
-	1. git clone git://github.com/imathis/octopress.git octpress
-	2. cd octopress  
+	 {%codeblock%}git clone git://github.com/imathis/octopress.git octpress
+	 cd octopress {%endcodeblock%} 
 	
 4. **安装依赖：**  
-	1. gem installbundler  
-	2. rbenvrehash    
-	3. bundltall
+	{%codeblock%}gem installbundler  
+	rbenvrehash    
+	bundltall{%endcodeblock%}
 		
 5. **安装octopres的默认主题：** 
 	rake install
@@ -32,7 +32,7 @@ categories: 工具
 2. 在Terminal中输入 rake setup_github_pages 命令，输入之后，Terminal将会提示你输入你刚才新建的repo的url，比如：git@github.com:username/username.github.io.git，直接复制粘贴即可。  
 
 ####第三部分，写blog，常用的几个命令如下：  
-1. **rake new_post["the title of your blog"]**,使用此命令可以会在$OCTOPRESS/source/_posts中新建一个markdown文件,Mac下可以使用Mou对其进行编辑，这个文件就是我们blog的原文件。  
+1. **rake new_post ["the title of your blog"]**,使用此命令可以会在$OCTOPRESS/source/_posts中新建一个markdown文件,Mac下可以使用Mou对其进行编辑，这个文件就是我们blog的原文件。  
 2. **rake generate**  
 3. **git add .**
 4. **git commit -m "xxxxx"**
@@ -42,7 +42,7 @@ categories: 工具
 
 PS:在使用rake deploy部署的过程中，我遇到了以下问题，git 提示：  
   
-{%codeblock%}//! [rejected]        master -> master (non-fast-forward)
+{%codeblock%}! [rejected]        master -> master (non-fast-forward)
 error: failed to push some refs to 'https://github.com/yeesterbunny/yeesterbunny.github.com.git'
 hint: Updates were rejected because the tip of your current branch is behind
 hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
