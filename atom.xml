@@ -4,7 +4,7 @@
   <title><![CDATA[Nic]]></title>
   <link href="http://imnic.github.io/atom.xml" rel="self"/>
   <link href="http://imnic.github.io/"/>
-  <updated>2014-10-09T18:33:57+08:00</updated>
+  <updated>2014-10-09T19:26:50+08:00</updated>
   <id>http://imnic.github.io/</id>
   <author>
     <name><![CDATA[Nic]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>一直都有写技术博客的想法，今天花了一些时间研究了一下如何使用Octopress来搭建自己的博客，从早上来就开始折腾，一直到现在，才算是全部搞定，那第一篇blog就先记录一下整个过程吧，也算是个良好的开端。</p>
 
 <p>具体的步骤其实完全可以按照 <a href="http://octopress.org">Octopress</a>官网给的步骤一步一步来就可以了，在此做一些简单的归纳，具体的步骤可以分为三部分：</p>
+
+<!-- more -->
+
 
 <h3>第一部分：Octopress的安装及配置</h3>
 
