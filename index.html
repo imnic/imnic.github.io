@@ -7,7 +7,7 @@
 	<meta name="author" content="Nic">
 
 	
-	<meta name="description" content=" 这两天开发过程中有一个需求，就是需要编辑用户下载下来的表情/贴纸包，包括排序和删除的功能，在此做一个总结： ios ">
+	<meta name="description" content="一直都有写技术博客的想法，今天花了一些时间研究了一下如何使用Octopress来搭建自己的博客，从早上来就开始折腾，一直到现在，才算是全部搞定，那第一篇blog就先记录一下整个过程吧，也算是个良好的开端。 具体的步骤其实完全可以按照 Octopress官网给的步骤一步一步来就可以了， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,12 +79,100 @@
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2014/10/09/ios-develop-1/">
+		<a href="/blog/2014/10/09/configure-blog-with-octopress/">
 		
-			UITableView的编辑&#8211;重新排序和删除</a>
+			使用Octopress搭建自己的博客系统</a>
 	</h2>
 	<div class="entry-content">
-		<p>这两天开发过程中有一个需求，就是需要编辑用户下载下来的表情/贴纸包，包括排序和删除的功能，在此做一个总结：</p>
+		<p>一直都有写技术博客的想法，今天花了一些时间研究了一下如何使用Octopress来搭建自己的博客，从早上来就开始折腾，一直到现在，才算是全部搞定，那第一篇blog就先记录一下整个过程吧，也算是个良好的开端。</p>
+
+<p>具体的步骤其实完全可以按照 <a href="http://octopress.org">Octopress</a>官网给的步骤一步一步来就可以了，在此做一些简单的归纳，具体的步骤可以分为三部分：</p>
+
+<h3>第一部分：Octopress的安装及配置</h3>
+
+<ol>
+<li><p><strong>安装</strong> <a href="http://http://git-scm.com">Git</a>,如果你的电脑上已经安装过了，可以忽略此步骤。</p></li>
+<li><p><strong>安装 Ruby：</strong>可以使用<a href="http://octopress.org/docs/setup/rbenv">Rbenv</a>或者<a href="http://octopress.org/docs/setup/rvm">RVM</a>两种方式安装，注意，我们要保证ruby的版本不能低于1.9.3，具体的查看方式为：在Terminal中输入 ruby &ndash;version 命令查。</p></li>
+<li><strong>设置 Octopess：</strong></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octpress       
+</span><span class='line'>cd octopress</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+4. <strong>安装依赖：</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler      
+</span><span class='line'>rbenv rehash  
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+5. <strong>安装octopres的默认主题：</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>第二部分：Github Pages相关的部署及配置：</h3>
+
+<ol>
+<li><p>当然你首先要有个Github账号，然后建立一个新的repo，repo的名字为youraccountname.github.io。<br/>
+<strong>注意:Github Pages已经将链接改为xxxx.github.io不再是xxxx.github.com</strong></p></li>
+<li><p>在Terminal中输入 rake setup_github_pages 命令，输入之后，Terminal将会提示你输入你刚才新建的repo的url，比如：git@github.com:username/username.github.io.git，直接复制粘贴即可。</p></li>
+</ol>
+
+
+<h3>第三部分，写blog，常用的几个命令如下：</h3>
+
+<ol>
+<li><strong>rake new_post [&ldquo;the title of your blog&rdquo;]</strong>,使用此命令可以会在$OCTOPRESS/source/_posts中新建一个markdown文件,Mac下可以使用Mou对其进行编辑，这个文件就是我们blog的原文件。</li>
+<li><strong>rake generate</strong></li>
+<li><strong>git add .</strong></li>
+<li><strong>git commit -m &ldquo;xxxxx&rdquo;</strong></li>
+<li><strong>git push origin source</strong></li>
+<li><strong>rake preview</strong>,输入完此命令，可以打开浏览器输入<a href="http://localhost:4000">http://localhost:4000</a>预览效果。</li>
+<li><strong>rake deploy</strong></li>
+</ol>
+
+
+<p>PS:在使用rake deploy部署的过程中，我遇到了以下问题，git 提示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>! [rejected]        master -> master (non-fast-forward)
+</span><span class='line'>error: failed to push some refs to 'https://github.com/yeesterbunny/yeesterbunny.github.com.git'
+</span><span class='line'>hint: Updates were rejected because the tip of your current branch is behind
+</span><span class='line'>hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+</span><span class='line'>hint: before pushing again.
+</span><span class='line'>hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里参照了<a href="http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/">这篇博客</a>的解决办法。</p>
+
+<p>以上就是使用Octopress来搭建个人博客的一些流程，另外我们可能还会需要更进一步的去定制你的个人博客，比如给你的博客添加评论和分享功能，定制你喜爱的主题等等，在此我就不再一一赘述，网上也有一些很不错的博客来介绍，比如<a href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/">这篇博客</a>就介绍的很详细。</p>
+
+<p>最后，也算是给自己提个醒，以后无论是开发或者研究一项新技术或者遇到其他的技术问题的时候，第一时间不要着急去google或者stackoverflow去查答案，要先看看要没有官方文档，有的话要第一时间去翻阅文档，看看自己的方法有没有问题，因为网上的各种资料可能会有偏差，而且随着时间的推移，官方文档可能会有更新，但网上的资料可能还是当时的解决方案，因此，遇到问题一定要先从官方文档着手。</p>
+
+<p>当然，在这里也要感谢前辈们的付出，我在学习的时候参照了他们的博客：<br/>
+<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p>
+
+<p><a href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/">http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/</a></p>
+
+<p><a href="http://alvinzhu.me/blog/2013/10/02/an-zhuang-he-pei-zhi-octopress/">http://alvinzhu.me/blog/2013/10/02/an-zhuang-he-pei-zhi-octopress/</a></p>
 
 		
 		
@@ -104,11 +192,11 @@
   
 
 
-<time datetime="2014-10-09T15:34:31+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2014-10-09T16:55:54+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/ios/'>ios</a>
+	<a class='category' href='/blog/categories/gong-ju/'>工具</a>
 
 
 </div>

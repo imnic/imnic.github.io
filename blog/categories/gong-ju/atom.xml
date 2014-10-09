@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Nic]]></title>
-  <link href="http://imnic.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 工具 | Nic]]></title>
+  <link href="http://imnic.github.io/blog/categories/gong-ju/atom.xml" rel="self"/>
   <link href="http://imnic.github.io/"/>
   <updated>2014-10-09T18:33:57+08:00</updated>
   <id>http://imnic.github.io/</id>
@@ -27,35 +27,23 @@
 <ol>
 <li><p><strong>安装</strong> <a href="http://http://git-scm.com">Git</a>,如果你的电脑上已经安装过了，可以忽略此步骤。</p></li>
 <li><p><strong>安装 Ruby：</strong>可以使用<a href="http://octopress.org/docs/setup/rbenv">Rbenv</a>或者<a href="http://octopress.org/docs/setup/rvm">RVM</a>两种方式安装，注意，我们要保证ruby的版本不能低于1.9.3，具体的查看方式为：在Terminal中输入 ruby &ndash;version 命令查。</p></li>
-<li><strong>设置 Octopess：</strong></li>
-</ol>
-
-
+<li><strong>设置 Octopess：</strong>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octpress       
-</span><span class='line'>cd octopress</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <br/>
-4. <strong>安装依赖：</strong></p>
-
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octpress     &lt;br/>
+</span><span class='line'>cd octopress</span></code></pre></td></tr></table></div></figure></li>
+<li><strong>安装依赖：</strong><br/>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler      
-</span><span class='line'>rbenv rehash  
-</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-5. <strong>安装octopres的默认主题：</strong></p>
-
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler  &lt;br/>
+</span><span class='line'>rbenv rehash&lt;br/>
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure></li>
+<li><strong>安装octopres的默认主题：</strong> <br/>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure></li>
+</ol>
 
-
-<p></p>
 
 <h3>第二部分：Github Pages相关的部署及配置：</h3>
 
@@ -81,19 +69,18 @@
 
 <p>PS:在使用rake deploy部署的过程中，我遇到了以下问题，git 提示：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>! [rejected]        master -> master (non-fast-forward)
-</span><span class='line'>error: failed to push some refs to 'https://github.com/yeesterbunny/yeesterbunny.github.com.git'
+</span><span class='line'>error: failed to push some refs to &lsquo;&lt;a href="https://github.com/yeesterbunny/yeesterbunny.github.com.git">https://github.com/yeesterbunny/yeesterbunny.github.com.git&lt;/a>&rsquo;
 </span><span class='line'>hint: Updates were rejected because the tip of your current branch is behind
-</span><span class='line'>hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+</span><span class='line'>hint: its remote counterpart. Merge the remote changes (e.g. &lsquo;git pull&rsquo;)
 </span><span class='line'>hint: before pushing again.
-</span><span class='line'>hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'>hint: See the &lsquo;Note about fast-forwards&rsquo; in &lsquo;git push &ndash;help&rsquo; for details.</span></code></pre></td></tr></table></div></figure></p>
 
 <p>这里参照了<a href="http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/">这篇博客</a>的解决办法。</p>
 
