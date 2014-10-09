@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios | Nic]]></title>
   <link href="http://imnic.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://imnic.github.io/"/>
-  <updated>2014-10-09T15:56:54+08:00</updated>
+  <updated>2014-10-09T16:08:31+08:00</updated>
   <id>http://imnic.github.io/</id>
   <author>
     <name><![CDATA[Nic]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ios_develop_1]]></title>
+    <title type="html"><![CDATA[UITableView的编辑--重新排序和删除]]></title>
     <link href="http://imnic.github.io/blog/2014/10/09/ios-develop-1/"/>
     <updated>2014-10-09T15:34:31+08:00</updated>
     <id>http://imnic.github.io/blog/2014/10/09/ios-develop-1</id>
-    <content type="html"><![CDATA[<p>这是我的第一篇blog,欢迎大家来访～</p>
+    <content type="html"><![CDATA[<p>这两天开发过程中有一个需求，就是需要编辑用户下载下来的表情/贴纸包，包括排序和删除的功能，在此做一个总结：</p>
 ]]></content>
   </entry>
   
