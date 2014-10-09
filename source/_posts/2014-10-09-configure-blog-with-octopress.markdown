@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用Octopress搭建自己的博客系统之Mac版"
+title: "使用Octopress搭建自己的博客系统"
 date: 2014-10-09 16:55:54 +0800
 comments: true
 categories: 工具
@@ -9,35 +9,33 @@ categories: 工具
 
 具体的步骤其实完全可以按照 [Octopress](http://octopress.org)官网给的步骤一步一步来就可以了，在此做一些简单的归纳，具体的步骤可以分为三部分：  
   
-####第一部分：Octopress的安装及配置
-1. **[安装 Git](http://http://git-scm.com)**,如果你的电脑上已经安装过了，可以忽略此步骤。  
+###第一部分：Octopress的安装及配置
+1. **安装** [Git](http://http://git-scm.com),如果你的电脑上已经安装过了，可以忽略此步骤。  
 
-2. **安装 Ruby：**可以使用[Rbenv](http://octopress.org/docs/setup/rbenv)或者[RVM](http://octopress.org/docs/setup/rvm)两种方式安装，注意，我们要保证ruby的版本不能地狱1.9.3，具体的查看方式为：在Terminal中输入 ruby --version 命令查。   
+2. **安装 Ruby：**可以使用[Rbenv](http://octopress.org/docs/setup/rbenv)或者[RVM](http://octopress.org/docs/setup/rvm)两种方式安装，注意，我们要保证ruby的版本不能低于1.9.3，具体的查看方式为：在Terminal中输入 ruby --version 命令查。   
 3. **设置 Octopess：** 
-	 {%codeblock%}git clone git://github.com/imathis/octopress.git octpress
-	 cd octopress {%endcodeblock%} 
-	
+{%codeblock%}git clone git://github.com/imathis/octopress.git octpress       
+cd octopress {%endcodeblock%}   
 4. **安装依赖：**  
-	{%codeblock%}gem installbundler  
-	rbenvrehash    
-	bundltall{%endcodeblock%}
-		
-5. **安装octopres的默认主题：** 
-	rake install
+{%codeblock%}gem install bundler  	
+rbenv rehash  
+bundle install{%endcodeblock%}	
+5. **安装octopres的默认主题：**   
+{%codeblock%}rake install{%endcodeblock%}	
   
-####第二部分：Github Pages相关的部署及配置： 
+###第二部分：Github Pages相关的部署及配置： 
 1. 当然你首先要有个Github账号，然后建立一个新的repo，repo的名字为youraccountname.github.io。  
 **注意:Github Pages已经将链接改为xxxx.github.io不再是xxxx.github.com**  
 
 2. 在Terminal中输入 rake setup_github_pages 命令，输入之后，Terminal将会提示你输入你刚才新建的repo的url，比如：git@github.com:username/username.github.io.git，直接复制粘贴即可。  
 
-####第三部分，写blog，常用的几个命令如下：  
+###第三部分，写blog，常用的几个命令如下：  
 1. **rake new_post ["the title of your blog"]**,使用此命令可以会在$OCTOPRESS/source/_posts中新建一个markdown文件,Mac下可以使用Mou对其进行编辑，这个文件就是我们blog的原文件。  
 2. **rake generate**  
 3. **git add .**
 4. **git commit -m "xxxxx"**
 5. **git push origin source**
-6. **rake preview**输入完此命令，可以打开浏览器输入http://localhost:4000预览效果。  
+6. **rake preview**,输入完此命令，可以打开浏览器输入<http://localhost:4000>预览效果。  
 7. **rake deploy**
 
 PS:在使用rake deploy部署的过程中，我遇到了以下问题，git 提示：  
