@@ -20,7 +20,6 @@ subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
-origional_url_pre: "原文地址："
 
 # ----------------------- #
 #    Jekyll & Plugins     #
