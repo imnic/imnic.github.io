@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ios开发 | Nic]]></title>
+  <link href="http://imnic.github.io/blog/categories/ioskai-fa/atom.xml" rel="self"/>
+  <link href="http://imnic.github.io/"/>
+  <updated>2014-10-10T20:20:46+08:00</updated>
+  <id>http://imnic.github.io/</id>
+  <author>
+    <name><![CDATA[Nic]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UITableView的编辑－－删除，插入及重新排序]]></title>
+    <link href="http://imnic.github.io/blog/2014/10/10/bian-ji-uitableview/"/>
+    <updated>2014-10-10T16:25:42+08:00</updated>
+    <id>http://imnic.github.io/blog/2014/10/10/bian-ji-uitableview</id>
+    <content type="html"><![CDATA[<p>这两天在开发表情商城的过程中，涉及到了已下载表情包的管理，因此自然想到使用 UITableView 来实现相关的功能，在此，对 UITableView 的编辑－－删除及重新排序进行一下简单的总结和归纳：</p>
+
+<!-- more -->
+
+
+<h2><strong>删除/插入Cell：</strong></h2>
+
+<p>相关函数：<br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
+</span><span class='line'>- (BOOL)tableView:(UITableView &lt;em>)tableView canEditRowAtIndexPath:(NSIndexPath &lt;/em>)indexPath;
+</span><span class='line'>- (void)tableView:(UITableView &lt;em>)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath &lt;/em>)indexPath;
+</span><span class='line'>- (void)insertRowsAtIndexPaths:(NSArray &lt;em>)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
+</span><span class='line'>- (void)deleteRowsAtIndexPaths:(NSArray &lt;/em>)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
+</span><span class='line'>- (void)beginUpdates;
+</span><span class='line'>- (void)endUpdates;</span></code></pre></td></tr></table></div></figure></p>
+
+<p>具体的流程可以参照下图：</p>
+
+<p><img src="http://imnicblogphotos.qiniudn.com/table_view_editing.jpg" alt="table_view_editing" /></p>
+
+<p>下面就这个流程图详细的解释一下：</p>
+
+<h3>方法一：</h3>
+
+<ol>
+<li><p>用户点击编辑按钮时，此时分两种情况：</p>
+
+<ul>
+<li><p>我们可以给tableView发送 setEditing:animated: 消息。</p></li>
+<li><p>当ViewController可以manage一个tableView时，比如，UITableViewController,或者在一个UIViewController中的loadView方法中，直接将一个tableView作为controller的view的情况下，当我们点击Navigation Bar上的Edit Button的时候，controller则会自动发送该消息给tableView。</p></li>
+</ul>
+</li>
+<li><p>当tableView收到 setEditing:animated: 消息之后,tableView会掉用 tableView:canEditRowAtIndexPath: 方法，来进一步的确定哪些rows可以被编辑。补充：</p>
+
+<ul>
+<li><p>你也可以不实现该方法，在这种情况下，所有的rows都将可以被编辑。</p></li>
+<li><p>而那些被指定了不能被编辑的rows将会忽略掉UITableViewCell的 editingStyle属性，当然也不会在处于编辑状态时向后缩进。</p></li>
+<li><p>如果你想让rows可以被编辑，但是又不想显示出编辑按钮如删除或增加的话，你可以实现 tableView:editingStyleForRowAtIndexPath: 方法，然后返回 UITableViewCellEditingStyleNone 。</p></li>
+</ul>
+</li>
+<li><p>接下来tableView会调用 tableView:editingStyleForRowAtIndexPath: 来确定编辑按钮的样式，可以是删除或者增加，当然如果你不实现该回调的话，默认的为UITableViewCellEditingStyleDelete。</p></li>
+<li><p>当用户点击左侧的编辑按钮（删除或者增加）的时候，右侧会出现删除按钮，点击右侧的删除按钮则表示确认删除。</p></li>
+<li><p>最后tableView会发送 tableView:commitEditingStyle:forRowAtIndexPath:给其 datasource，尽管该protocol是可选的，但是如果如果你想删除或者增加一行的话，你就必须实现该方法。在该方法中你必须做以下几件事：</p>
+
+<ul>
+<li><p>beginUpdates:当你想要在删除某一行的时候同时以动画的方式展现给用户的话，你必须要先调用该方法，该方法是跟endUpdates配对使用的，在此之间，你不能调用reloadData方法，否则，你必须自己实现动画的展现形式。</p></li>
+<li><p>发送 deleteRowsAtIndexPaths:withRowAnimation: 或 insertRowsAtIndexPaths:withRowAnimation: 来展示删除。</p></li>
+<li><p>更新你的 data-model，比如在array中增加或者删除object。</p></li>
+<li><p>endUpdates:跟 beginUpdates 配对使用。</p></li>
+</ul>
+
+
+<p> <strong>注意:在endUpdates之前,如果你调用了 deleteRowsAtIndexPaths:withRowAnimation:时，
+ 一定记得要更新数据，比如删除新的数据在model－data中，否则应用将会崩溃，报错：<br/>
+ Assertion failure in -[UITableView _endCellAnimationsWithContext:]</strong>。</p></li>
+</ol>
+
+
+<h3>方法二：</h3>
+
+<p>除此之外，你也可以使用swipe-to-delete方法，但是具体的流程跟上面不太相同：</p>
+
+<ol>
+<li><p>当用户在一个cell上滑动的时候tableView会检测data source是否实现了 tableView:commitEditingStyle:forRowAtIndexPath: 方法，如果实现了的话他就会发送 setEditing:animated: 模式，然后进入编辑模式。<br/>
+<strong>注意：在此方法中,你不能调用setEditing:animated:方法，如果由于某种原因必须要调用的话，你必须使用performSelector:withObject:afterDelay:方法来调用</strong>。</p></li>
+<li><p>当用户开始滑动的时候会调用tableView:willBeginEditingRowAtIndexPath: ，当你点击删除或者点击空白处取消的时候则会调用 tableView:didEndEditingRowAtIndexPath:方法。</p></li>
+<li><p>接下来你只需要在 tableView:commitEditingStyle:forRowAtIndexPath: 方法中实现跟上面一样的方法即可。</p></li>
+</ol>
+
+
+<h3>方法三：</h3>
+
+<p>当然，你也可以不采用系统原生的编辑按钮，你可以自己在cell中自定义一个删除按钮，当用户点击删除按钮的时候，你只需要做如下的事情即可：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[self.tableView beginUpdates];&lt;br/>
+</span><span class='line'>[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];&lt;br/>
+</span><span class='line'>[self.resourceArray removeObjectAtIndex:indexPath.row];&lt;br/>
+</span><span class='line'>[self.tableView endUpdates];</span></code></pre></td></tr></table></div></figure></p>
+
+<p>当然你也可以直接：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[self.resourceArray removeObjectAtIndex:indexPath.row];  &lt;br/>
+</span><span class='line'>[self.tableView reloadData];</span></code></pre></td></tr></table></div></figure></p>
+
+<p>但是这样用户体验并不好，不推荐！</p>
+
+<p>而对于插入Cell的话，虽然我们也可以使用类似删除的系统原生方式（当tableView处于编辑模式时，点击cell左侧的编辑/插入按钮），但我们更倾向于使用在navigation bar上添加一个按钮，而具体的过程可以参照上面删除的流程。</p>
+
+<h2><strong>重新排序</strong></h2>
+
+<p>清楚了上面的流程之后我们在做排序的时候，我们在去做重新排序的时候就会比较简单了。<br/>
+相关函数：<br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)setShowsReorderControl:(BOOL)showsReorderControl;&lt;br/>
+</span><span class='line'>- (void)setEditing:(BOOL)editing animated:(BOOL)animate;&lt;br/>
+</span><span class='line'>- (BOOL)tableView:(UITableView &lt;em>)tableView canMoveRowAtIndexPath:(NSIndexPath &lt;/em>)indexPath;&lt;br/>
+</span><span class='line'>- (NSIndexPath &lt;em>)tableView:(UITableView &lt;/em>)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath &lt;em>)sourceIndexPath toProposedIndexPath:(NSIndexPath &lt;/em>)proposedDestinationIndexPath&lt;br/>
+</span><span class='line'>- (void)tableView:(UITableView &lt;em>)tableView moveRowAtIndexPath:(NSIndexPath &lt;/em>)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath</span></code></pre></td></tr></table></div></figure></p>
+
+<p>具体的流程可以参照下图：</p>
+
+<p><img src="http://imnicblogphotos.qiniudn.com/table_view_moving.jpg" alt="table_view_moving" /></p>
+
+<p>同样的，我们对这个流程也进行一下详细的解释：</p>
+
+<ol>
+<li><p>首先，当用户点击排序按钮时，tableView进入编辑模式，这也是分两种情况：</p>
+
+<ul>
+<li><p>我们可以给tableView发送 setEditing:animated: 消息。</p></li>
+<li><p>当ViewController可以manage一个tableView时，比如，UITableViewController,或者在一个UIViewController中的loadView方法中，直接将一个tableView作为controller的view的情况下，当我们点击Navigation Bar上的Edit Button的时候，controller则会自动发送该消息给tableView。</p></li>
+</ul>
+</li>
+<li><p>当tableView收到 setEditing:animated: 消息之后，他会给data source发送tableView:canMoveRowAtIndexPath:方法，在该方法中你可以筛选出来那些cell是可以被move而哪些不可以。</p></li>
+<li><p>当用户拖动某一个cell上下移动的时候，就会调用</p>
+
+<p> tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:</p>
+
+<p> 这个方法中，我们可以指定cell的可移动范围，比如：<br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (NSIndexPath &lt;em>)tableView:(UITableView &lt;/em>)tableView
+</span><span class='line'>     targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath &lt;em>)sourceIndexPath
+</span><span class='line'>     toProposedIndexPath:(NSIndexPath &lt;/em>)proposedDestinationIndexPath &lt;br/>
+</span><span class='line'>{
+</span><span class='line'> NSDictionary *section = [data objectAtIndex:sourceIndexPath.section];&lt;br/>
+</span><span class='line'> NSUInteger sectionCount = [[section valueForKey:@&ldquo;content&rdquo;] count];&lt;br/>
+</span><span class='line'> if (sourceIndexPath.section != proposedDestinationIndexPath.section) &lt;br/>
+</span><span class='line'> {&lt;br/>
+</span><span class='line'>     NSUInteger rowInSourceSection =&lt;br/>
+</span><span class='line'>          (sourceIndexPath.section > proposedDestinationIndexPath.section) ?&lt;br/>
+</span><span class='line'>            0 : sectionCount - 1;&lt;br/>
+</span><span class='line'>     return [NSIndexPath indexPathForRow:rowInSourceSection   inSection:sourceIndexPath.section];&lt;br/>
+</span><span class='line'> } &lt;br/>
+</span><span class='line'> else if (proposedDestinationIndexPath.row >= sectionCount) &lt;br/>
+</span><span class='line'> {&lt;br/>
+</span><span class='line'>     return [NSIndexPath indexPathForRow:sectionCount - 1   inSection:sourceIndexPath.section];&lt;br/>
+</span><span class='line'> }&lt;br/>
+</span><span class='line'> // Allow the proposed destination.&lt;br/>
+</span><span class='line'> return proposedDestinationIndexPath;&lt;br/>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>最后，当用户松开手之后，tableView就会给data source发送 tableView:moveRowAtIndexPath:toIndexPath: 消息，在该方法中我们可以更新model－data，比如：<br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)tableView:(UITableView &lt;em>)tableView moveRowAtIndexPath:(NSIndexPath &lt;/em>)sourceIndexPath toIndexPath:(NSIndexPath &lt;em>)destinationIndexPath &lt;br/>
+</span><span class='line'>{&lt;br/>
+</span><span class='line'> NSString &lt;/em>stringToMove = [self.reorderingRows objectAtIndex:sourceIndexPath.row];&lt;br/>
+</span><span class='line'> [self.reorderingRows removeObjectAtIndex:sourceIndexPath.row];&lt;br/>
+</span><span class='line'> [self.reorderingRows insertObject:stringToMove atIndex:destinationIndexPath.row];&lt;br/>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></p></li>
+</ol>
+
+
+<p><strong>注意：我们如果想要显示reorder control，就必须设置cell 的 showsReorderControl属性为YES,同时必须实现tableView:moveRowAtIndexPath:toIndexPath: 方法</strong>。</p>
+]]></content>
+  </entry>
+  
+</feed>
