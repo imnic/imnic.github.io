@@ -3,6 +3,8 @@ layout: post
 title: "UITableView的编辑－－删除，插入及重新排序"
 date: 2014-10-10 16:25:42 +0800
 comments: true
+description: UITableView的编辑－－删除，插入及重新排序.
+keywords: iOS, iOS开发, UITableView, 删除, 插入, 重新排序, 排序, Cell
 categories: iOS开发
 ---
 这两天在开发表情商城的过程中，涉及到了已下载表情包的管理，因此自然想到使用 UITableView 来实现相关的功能，在此，对 UITableView 的编辑－－删除及重新排序进行一下简单的总结和归纳：  

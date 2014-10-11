@@ -3,6 +3,8 @@ layout: post
 title: "使用Octopress搭建自己的博客系统"
 date: 2014-10-09 16:55:54 +0800
 comments: true
+description: 如何在Mac上使用Octopress搭建自己的博客系统.
+keywords: octopress, blog, 博客, iOS
 categories: 工具
 ---
 一直都有写技术博客的想法，今天花了一些时间研究了一下如何使用Octopress来搭建自己的博客，从早上来就开始折腾，一直到现在，才算是全部搞定，那第一篇blog就先记录一下整个过程吧，也算是个良好的开端。  
