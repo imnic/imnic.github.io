@@ -4,7 +4,7 @@
   <title><![CDATA[Nic]]></title>
   <link href="http://imnic.github.io/atom.xml" rel="self"/>
   <link href="http://imnic.github.io/"/>
-  <updated>2014-10-11T11:46:38+08:00</updated>
+  <updated>2014-10-11T11:50:58+08:00</updated>
   <id>http://imnic.github.io/</id>
   <author>
     <name><![CDATA[Nic]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://imnic.github.io/blog/2014/10/11/test/"/>
-    <updated>2014-10-11T11:14:58+08:00</updated>
-    <id>http://imnic.github.io/blog/2014/10/11/test</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[UITableView的编辑－－删除，插入及重新排序]]></title>
