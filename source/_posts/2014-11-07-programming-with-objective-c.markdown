@@ -5,7 +5,6 @@ date: 2014-11-07 12:39:00 +0800
 comments: true
 categories: iOS开发
 ---
-#Programming with Objective-C
 Objective-C(以下简称OC)是C语言的超集，OC中添加了面向对象以及动态运行时的特性，它继承了C的语法特性，简单类型，以及控制条件，并添加了定义类和方法的语法。同时也对于对象图的管理和literal syntax上添加了语言级的支持，包括动态绑定以及推迟尽可能多的职责到运行时。  
 <!-- more -->
 ##Defining classes
