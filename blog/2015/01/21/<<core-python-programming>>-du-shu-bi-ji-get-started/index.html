@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>关于技术学习的一些感悟 - Nic</title>
+	<title>《Core Python Programming》读书笔记&#8211;Get Started - Nic</title>
 	<meta name="author" content="Nic">
 	
 	
@@ -87,12 +87,30 @@ $(document).bind('DOMNodeInserted', function(event) {
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">关于技术学习的一些感悟</h2>
-	<div class="entry-content"><p>做iOS开发这么久了，一直以来都在不断的接触新的知识，但是总感觉自己的知识是零散而不成体系的，想来想去，感觉大概是跟自己一直以来的学习方式有关，因为之前的很长一段时间内，我在遇到新的知识或问题的时候，总是第一时间倾向于上google，stackoverflow去找相关的资料，但这其实是一种很不好的习惯，因为这很不利于培养自己独立解决问题的能力。</p>
+	<h2 class="title">《Core Python Programming》读书笔记&#8211;Get Started</h2>
+	<div class="entry-content"><ol>
+<li><p>python文件是以 .py 为后缀名的。</p></li>
+<li><p>在执行 python 文件的时候可以在terminal中使用命令行 python hello.py这样的方式，也可以在python元文件的首行添加上#!/usr/bin/env python这样的注释行，这样做其实是在告诉系统python解释器的位置，这样在执行 python 脚本的时候，就可以直接使用./hello.py的方式来直接执行。</p></li>
+<li><p>Python 中使用 ＃ 来表示注释，多行注释可以在每一行的开头使用一个 #。</p></li>
+<li><p>Python 中使用 print 进行格式化输出时不需要加逗号，而如果print输出之后，还有一个表达式的话，那就需要加上逗号。</p></li>
+<li><p>Python 中不需要对各种基本类型变量进行定义。</p></li>
+<li><p>Python 中可以使用&#8217;&lsquo;或&#8221;&ldquo;者来表示字符串，但是两者不能混用。</p></li>
+<li><p>当你需要在print中输出&#8221;&ldquo;的时候，你需要加上\转义符。</p></li>
+<li><p>当你需要输出多行的时候你可以使用&#8221;&ldquo;&rdquo; &ldquo;&rdquo;&ldquo;来进行输出。</p></li>
+<li><p>你可以使用 pydoc 方法名来查阅一个函数的文档。例如：pydoc raw_input()。</p></li>
+<li><p>python 中的函数并不需要明确的指明返回类型，如果没有返回值，那么将会默认的返回一个NULL。</p></li>
+<li><p>python 中的函数的参数并不需要明确的指出其参数类型。</p></li>
+<li><p>python 并不支持像其他语言中的 &ndash;n 或者 ++n 之类的自加或者自减运算符，python只会将其当作普通的一元运算符来代替。</p></li>
+<li><p>python 中的代码块并没有类似其他语言的{}，而是用缩紧来代表一个代码块。</p></li>
+<li><p>python 中的 for 语句更像是其他语言中的 foreach。</p></li>
+<li><p>print 语句会默认的在每一条输出语句后面加上一个换行符，如果不想使用这个功能，那么我们可以在print语句后加上一个逗号（,）。</p></li>
+<li><p>同 Objective-C 不太一样，格式化输出的时候，并不需要在 print 语句的后面加上逗号用于分割变量。</p></li>
+<li><p>虽然python中没有像其他语言中那样的for循环，但是我们可以使用 for item in [0,1,2] 或者 for item in range(3) 这样的方式来取得同样的效果。</p></li>
+<li><p>python 中的求幂运算符为(**)。</p></li>
+<li><p>python 中使用 def 关键字来定义一个函数。</p></li>
+<li><p>python 中的 <strong>init</strong>() 默认会被提供，并且在类的实例被创造出来之后会被调用，我们可以将其当作是一个构造函数，但是同其他语言中的构造函数并不相同，<strong>init</strong>() 函数并不创建实例对象，他只是在实例对象创建完成之后会首先被调用，我们可以重载该函数，然后在函数中对创建出来的实例变量的属性进行赋值。</p></li>
+</ol>
 
-<p>而事实上，最好的学习资料永远是官方文档，网上的那些资料难免会因为作者自己当时的理解不到位而跟官方文档实际所表达的意思相比有所偏差，甚至有一些资料完全就是误人子弟，当然，网上的一些知名开发者写的博客还是非常值得学习的，而且对于那些你自己很长一段时间内理解不透的东西，可能别人的一句话，你就瞬间理解了其中的原理。所以，在遇到新的知识或者问题，最好的习惯永远是先尝试查阅官方文档，并且Apple本身就某一个知识点通常也有非常全面的Programming Guide，而网上的一些blog之类的资料可以作为一个辅助的学习资料，比如在遇到问题时，看了官方文档之后还是稀里糊涂或者某个比较奇怪的问题在官方文档无法找到答案时，这个时候可以尝试上网上去查一下别人对于这个问题是怎么理解的，或者怎么解决的，别人的整体思路是怎么样的，这样的话，你才会对这个问题的理解更为深刻，虽然可能当时在解决某一个问题的时候会花费很多的时间，但当问题解决之后，你一定会对此问题有一个非常深刻理解，此时可以再写一篇博客来加深你对于该问题的理解，这样的话下次再遇到同样的问题的时候，你就可以迅速的解决问题，这样就能形成一个非常好的良性循环，而如果每次都是贪图一时之快而去网上找一些现成的解决方案或者资料的话，你会发现无论同一个问题遇到多少次，你都会对它感觉到如此的陌生，因为这些知识从来都不是属于你自己的。</p>
-
-<p>所以，我决定将自己关于iOS开发方面的知识整理成一个系列，这样的话，对于那些自己以前理解的不到位或者模棱两可的地方，可以通过学习文档，有一个新的认识，而对于那些之前没有接触过的知识，可以通过查阅官方的Programming Guide来进行一个全方位的深入学习。</p>
 </div>
 
 
@@ -109,11 +127,11 @@ $(document).bind('DOMNodeInserted', function(event) {
   
 
 
-<time datetime="2014-11-07T14:31:59+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-01-21T10:57:02+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/ioskai-fa/'>ios开发</a>
+	<a class='category' href='/blog/categories/python/'>python</a>
 
 
 </div>
